@@ -1,0 +1,70 @@
+package org.example.som;
+
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class Som extends Activity {
+	Button btplay, btpausar;
+	MediaPlayer player;
+	//boolean Click;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_som);
+
+		btplay = (Button) findViewById(R.id.bttocar);
+		btpausar = (Button) findViewById(R.id.btpausar);
+		player = MediaPlayer.create(this, R.raw.musica);
+		btstop = (Button) findViewById(R.id.btstop);
+		
+
+		try {
+			player.prepare();
+		} catch (Exception e) {
+		}
+
+		
+		OnClickListener coco = new View.OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				player.start();
+			}
+		};
+
+		
+		btplay.setOnClickListener(coco);
+		
+		btstop.setOnClickListener(new View.OnClickListener(){
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				player = null;
+				player.stop();
+				if (player != null);
+					player.release();
+					player = null;
+			}
+		});
+
+		btpausar.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				player.pause();
+
+			}
+		});
+		
+		
+	}
+
+}

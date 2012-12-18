@@ -1,0 +1,36 @@
+package org.example.sodoku;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+
+public class Keypad extends Dialog {
+	
+	protected static final String TAG ="Sodoku";
+	
+	private final View Keys[] = new View [9];
+	private View Keypad;
+	private final int useds[];
+	private final PuzzleView puzzleView;
+	
+	public  Keypad(Context context, int useds[], PuzzleView puzzleView){
+		super(context);
+		this.useds = useds;
+		this.puzzleView =  puzzleView;
+	}
+	@Override
+	protected void onCreate(Bundle saveInstanceState){
+		super.onCreate(savedInstanceState);
+		setTitle(R.string.Keypad_title);
+		setContentView(R.layout.Keypad);
+		findViews();
+		for (int element : useds){
+			if (element != 0)
+				keys[element - 1].setVisibilit(View.INVISIBLE);
+		}
+		setListeners();
+	}
+	//...
+}
